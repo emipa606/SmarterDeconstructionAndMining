@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Verse;
 
 namespace SmartDeconstruct;
@@ -48,18 +49,17 @@ public class SmartDeconSettings : ModSettings
             return;
         }
 
-        if (LoadedModManager.RunningModsListForReading.Any(pack => pack.Name.Contains("Raise The Roof")))
+        foreach (var researchDefName in new List<string>
+                     { "RTR_OverheadMountainRemoval", "OverheadMountainRemoval", "ThickStoneRoofRemoval" })
         {
-            defaultThick = true;
-            defaultResearchProjectDef = ResearchProjectDef.Named("OverheadMountainRemoval");
-            Log.Message("[SmarterDeconstructionAndMining]: Added compatibility with Raise the Roof");
-        }
+            var foundResearch = DefDatabase<ResearchProjectDef>.GetNamedSilentFail(researchDefName);
+            if (foundResearch == null)
+            {
+                continue;
+            }
 
-        if (LoadedModManager.RunningModsListForReading.Any(pack => pack.Name.Contains("Expanded Roofing")))
-        {
-            defaultThick = true;
-            defaultResearchProjectDef = ResearchProjectDef.Named("ThickStoneRoofRemoval");
-            Log.Message("[SmarterDeconstructionAndMining]: Added compatibility with Expanded Roofing");
+            defaultResearchProjectDef = foundResearch;
+            break;
         }
 
         Thick = defaultThick;

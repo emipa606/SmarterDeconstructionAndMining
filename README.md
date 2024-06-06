@@ -1,4 +1,4 @@
-# [Smarter Deconstruction and Mining (Continued)]()
+# [Smarter Deconstruction and Mining (Continued)](https://steamcommunity.com/sharedfiles/filedetails/?id=3261302741)
 
 ![Image](https://i.imgur.com/buuPQel.png)
 Update of legodude17s mod https://steamcommunity.com/sharedfiles/filedetails/?id=2398365712
@@ -49,3 +49,5 @@ Commissioned by [https://www.twitch.tv/GGVikky1](GGVikky) on the RimWorld Mod Ma
 -  Use [https://github.com/RimSort/RimSort/releases/latest](RimSort) to sort your mods
 
 
+
+[https://steamcommunity.com/sharedfiles/filedetails/changelog/3261302741]![Image]((https://img.shields.io/github/v/release/emipa606/SmarterDeconstructionAndMining?label=latest%20version&style=plastic&color=9f1111&labelColor=black))

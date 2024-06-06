@@ -1,5 +1,8 @@
 # Changelog for SmarterDeconstructionAndMining
 
+1.5.1 - Fixed compatibility with Raise the Roof
+
+
 1.5.0 - First publish
 Used DeepL to update translations for ChineseSimplified, French, German
 
