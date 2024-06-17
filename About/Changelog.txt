@@ -1,5 +1,8 @@
 # Changelog for SmarterDeconstructionAndMining
 
+1.5.2 - Remove thick roofs should now be true when a mod that allows that is loaded.
+
+
 1.5.1 - Fixed compatibility with Raise the Roof
 
 

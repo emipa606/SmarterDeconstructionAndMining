@@ -2,7 +2,7 @@
 <ModSyncNinjaData>
   <ID>1247ce72-61d3-4f3a-af22-78ca09302fde</ID>
   <ModName>Smarter Deconstruction and Mining (Continued)</ModName>
-  <Version>1.5.1</Version>
+  <Version>1.5.2</Version>
   <SaveBreaking>False</SaveBreaking>
   <Host name="Github">
     <Owner>emipa606</Owner>
@@ -12,3 +12,4 @@
     <Branch>master</Branch>
   </Host>
 </ModSyncNinjaData>
+

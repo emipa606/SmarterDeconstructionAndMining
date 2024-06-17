@@ -5,6 +5,7 @@ namespace SmartDeconstruct;
 
 public class SmartDeconSettings : ModSettings
 {
+    [Unsaved] private readonly bool defaultThick = true;
     public bool Animals;
 
     public bool Buildings = true;
@@ -13,8 +14,6 @@ public class SmartDeconSettings : ModSettings
     [Unsaved] private ResearchProjectDef defaultResearchProjectDef;
 
     private bool defaultsSet;
-
-    [Unsaved] private bool defaultThick;
 
     private bool explicitNull;
 
