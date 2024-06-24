@@ -61,7 +61,6 @@ public class SmartDeconSettings : ModSettings
             break;
         }
 
-        Thick = defaultThick;
         defaultsSet = true;
     }
 
