@@ -1,5 +1,8 @@
 # Changelog for SmarterDeconstructionAndMining
 
+1.5.4 - Updated spanish translation, thanks Ferchu
+
+
 1.5.3 - Removed the auto-set of thick roof option
 
 
