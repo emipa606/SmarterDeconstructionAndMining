@@ -1,5 +1,8 @@
 # Changelog for SmarterDeconstructionAndMining
 
+1.5.5 - Should now also check for colony-mechs
+
+
 1.5.4 - Updated spanish translation, thanks Ferchu
 
 

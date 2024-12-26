@@ -132,7 +132,7 @@ public class SmartDeconstructMod : Mod
             return false;
         }
 
-        if (!pawn.IsColonist && !Settings.NonColonists)
+        if (!pawn.IsColonist && !pawn.IsColonyMech && !Settings.NonColonists)
         {
             return false;
         }
