@@ -5,13 +5,13 @@ namespace SmartDeconstruct;
 
 public class JobInfo(Job job)
 {
-    public readonly JobDef def = job.def;
+    public readonly JobDef Def = job.def;
 
-    public readonly bool playerForced = job.playerForced;
+    public readonly bool PlayerForced = job.playerForced;
 
-    public LocalTargetInfo targetA = job.targetA;
+    public LocalTargetInfo TargetA = job.targetA;
 
-    public LocalTargetInfo targetB = job.targetB;
+    public LocalTargetInfo TargetB = job.targetB;
 
-    public LocalTargetInfo targetC = job.targetC;
+    public LocalTargetInfo TargetC = job.targetC;
 }

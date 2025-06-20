@@ -9,6 +9,7 @@
     <li>1.3</li>
     <li>1.4</li>
     <li>1.5</li>
+    <li>1.6</li>
   </supportedVersions>
   <modDependencies>
     <li>
@@ -75,5 +76,5 @@ Commissioned by [url=https://www.twitch.tv/GGVikky1]GGVikky[/url] on the RimWorl
 [/list] 
 
 [url=https://steamcommunity.com/sharedfiles/filedetails/changelog/3261302741][img]https://img.shields.io/github/v/release/emipa606/SmarterDeconstructionAndMining?label=latest%20version&amp;style=plastic&amp;color=9f1111&amp;labelColor=black[/img][/url] | tags:  roofs,  mining, deconstruction</description>
-  <modVersion IgnoreIfNoMatchingField="True">1.5.5</modVersion>
+  <modVersion IgnoreIfNoMatchingField="True">1.6.0</modVersion>
 </ModMetaData>

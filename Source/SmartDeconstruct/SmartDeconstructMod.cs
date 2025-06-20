@@ -15,14 +15,12 @@ public class SmartDeconstructMod : Mod
 
     private static readonly List<IntVec3> tempRoofCells = [];
 
-    public static Harmony Harm;
-
     public static SmartDeconSettings Settings;
     private static string currentVersion;
 
     private readonly List<ResearchProjectDef> researches = [];
 
-    private readonly QuickSearchWidget search = new QuickSearchWidget();
+    private readonly QuickSearchWidget search = new();
 
     private Vector2 scrollPos;
 
@@ -30,11 +28,11 @@ public class SmartDeconstructMod : Mod
         : base(content)
     {
         currentVersion = VersionFromManifest.GetVersionFromModMetaData(content.ModMetaData);
-        Harm = new Harmony("legodude17.smartdecon");
+        var harmony = new Harmony("legodude17.smartdecon");
         Settings = GetSettings<SmartDeconSettings>();
-        Harm.Patch(AccessTools.Method(typeof(JobDriver_RemoveBuilding), "MakeNewToils"), null,
+        harmony.Patch(AccessTools.Method(typeof(JobDriver_RemoveBuilding), "MakeNewToils"), null,
             new HarmonyMethod(typeof(SmartDeconstructMod), nameof(CheckForRoofsBeforeJob)));
-        Harm.Patch(AccessTools.Method(typeof(JobDriver_Mine), "MakeNewToils"), null,
+        harmony.Patch(AccessTools.Method(typeof(JobDriver_Mine), "MakeNewToils"), null,
             new HarmonyMethod(typeof(SmartDeconstructMod), nameof(CheckForRoofsBeforeJob)));
         LongEventHandler.ExecuteWhenFinished(delegate
         {
@@ -50,21 +48,21 @@ public class SmartDeconstructMod : Mod
     public override void DoSettingsWindowContents(Rect inRect)
     {
         base.DoSettingsWindowContents(inRect);
-        var listing_Standard = new Listing_Standard();
-        listing_Standard.Begin(inRect);
-        listing_Standard.CheckboxLabeled("SmartDeconstruct.Buildings.Label".Translate(), ref Settings.Buildings,
+        var listingStandard = new Listing_Standard();
+        listingStandard.Begin(inRect);
+        listingStandard.CheckboxLabeled("SmartDeconstruct.Buildings.Label".Translate(), ref Settings.Buildings,
             "SmartDeconstruct.Buildings.Tooltip".Translate());
-        listing_Standard.CheckboxLabeled("SmartDeconstruct.Mining.Label".Translate(), ref Settings.Mining,
+        listingStandard.CheckboxLabeled("SmartDeconstruct.Mining.Label".Translate(), ref Settings.Mining,
             "SmartDeconstruct.Mining.Tooltip".Translate());
-        listing_Standard.CheckboxLabeled("SmartDeconstruct.CancelThick.Label".Translate(), ref Settings.CancelThick,
+        listingStandard.CheckboxLabeled("SmartDeconstruct.CancelThick.Label".Translate(), ref Settings.CancelThick,
             "SmartDeconstruct.CancelThick.Tooltip".Translate());
-        listing_Standard.CheckboxLabeled("SmartDeconstruct.NonColonists.Label".Translate(), ref Settings.NonColonists,
+        listingStandard.CheckboxLabeled("SmartDeconstruct.NonColonists.Label".Translate(), ref Settings.NonColonists,
             "SmartDeconstruct.NonColonists.Tooltip".Translate());
-        listing_Standard.CheckboxLabeled("SmartDeconstruct.Animals.Label".Translate(), ref Settings.Animals,
+        listingStandard.CheckboxLabeled("SmartDeconstruct.Animals.Label".Translate(), ref Settings.Animals,
             "SmartDeconstruct.Animals.Tooltip".Translate());
-        listing_Standard.CheckboxLabeled("SmartDeconstruct.Thick.Label".Translate(), ref Settings.Thick,
+        listingStandard.CheckboxLabeled("SmartDeconstruct.Thick.Label".Translate(), ref Settings.Thick,
             "SmartDeconstruct.Thick.Tooltip".Translate());
-        var rect = listing_Standard.GetRect(inRect.height - listing_Standard.CurHeight);
+        var rect = listingStandard.GetRect(inRect.height - listingStandard.CurHeight);
         var rect2 = rect.LeftHalf().TopPartPixels(Text.LineHeight + 6f).ContractedBy(0f, 3f);
         if (currentVersion != null)
         {
@@ -89,20 +87,20 @@ public class SmartDeconstructMod : Mod
         Widgets.BeginScrollView(rect, ref scrollPos, viewRect);
         if (Settings.ThickResearch != null)
         {
-            if (Widgets.ButtonText(Func(), Settings.ThickResearch.LabelCap))
+            if (Widgets.ButtonText(buttonFunction(), Settings.ThickResearch.LabelCap))
             {
                 Settings.ThickResearch = null;
             }
 
             GUI.color = Color.yellow;
-            Widgets.DrawBox(Func(), 2);
+            Widgets.DrawBox(buttonFunction(), 2);
             GUI.color = Color.white;
             curY += 32f;
         }
 
         foreach (var item in researches.Except(Settings.ThickResearch).OrderBy(def => def.label))
         {
-            if (Widgets.ButtonText(Func(), item.LabelCap))
+            if (Widgets.ButtonText(buttonFunction(), item.LabelCap))
             {
                 Settings.ThickResearch = item;
             }
@@ -111,18 +109,18 @@ public class SmartDeconstructMod : Mod
         }
 
         Widgets.EndScrollView();
-        listing_Standard.End();
+        listingStandard.End();
         return;
 
-        Rect Func()
+        Rect buttonFunction()
         {
             return new Rect(1f, curY, viewRect.width - 2f, 30f);
         }
     }
 
-    public static bool ShouldApply(Pawn pawn, bool isDecon, bool isMine)
+    private static bool shouldApply(Pawn pawn, bool isDeconstruction, bool isMine)
     {
-        if (isDecon && !Settings.Buildings)
+        if (isDeconstruction && !Settings.Buildings)
         {
             return false;
         }
@@ -142,9 +140,9 @@ public class SmartDeconstructMod : Mod
 
     public static IEnumerable<Toil> CheckForRoofsBeforeJob(IEnumerable<Toil> toils, JobDriver __instance)
     {
-        var isDecon = __instance is JobDriver_RemoveBuilding;
+        var isDeconstruction = __instance is JobDriver_RemoveBuilding;
         var isMine = __instance is JobDriver_Mine;
-        if (ShouldApply(__instance.pawn, isDecon, isMine))
+        if (shouldApply(__instance.pawn, isDeconstruction, isMine))
         {
             yield return new Toil
             {
@@ -153,10 +151,11 @@ public class SmartDeconstructMod : Mod
                     var pawn = __instance.pawn;
                     var map2 = pawn.Map;
                     var jobInfo = new JobInfo(__instance.job);
-                    var thing2 = jobInfo.targetA.Thing;
+                    var thing2 = jobInfo.TargetA.Thing;
                     var roofs = new List<IntVec3>();
                     var supporters = new List<Building>();
-                    var designation = isMine ? DesignationDefOf.Mine : isDecon ? DesignationDefOf.Deconstruct : null;
+                    var designation = isMine ? DesignationDefOf.Mine :
+                        isDeconstruction ? DesignationDefOf.Deconstruct : null;
                     if (!thing2.def.holdsRoof)
                     {
                         return;
@@ -181,7 +180,7 @@ public class SmartDeconstructMod : Mod
 
                                 var edifice2 = c3.GetEdifice(map2);
                                 if (edifice2 == null || !edifice2.def.holdsRoof || edifice2 == thing2 ||
-                                    GetDesignation(edifice2, designation, map2) != null ||
+                                    getDesignation(edifice2, designation, map2) != null ||
                                     supporters.Contains(edifice2))
                                 {
                                     continue;
@@ -210,7 +209,7 @@ public class SmartDeconstructMod : Mod
                         return;
                     }
 
-                    if (!Settings.CanThick && Settings.CancelThick && !jobInfo.playerForced &&
+                    if (!Settings.CanThick && Settings.CancelThick && !jobInfo.PlayerForced &&
                         roofs.Any(roof => roof.GetRoof(map2).isThickRoof))
                     {
                         if (PawnUtility.ShouldSendNotificationAbout(pawn))
@@ -226,7 +225,7 @@ public class SmartDeconstructMod : Mod
                             return;
                         }
 
-                        var designation2 = GetDesignation(thing2, designation, map2);
+                        var designation2 = getDesignation(thing2, designation, map2);
                         if (designation2 != null)
                         {
                             map2.designationManager.RemoveDesignation(designation2);
@@ -277,13 +276,13 @@ public class SmartDeconstructMod : Mod
                                 tempBuildRoofCells.Add(cell);
                             }
 
-                            item.playerForced = jobInfo.playerForced;
+                            item.playerForced = jobInfo.PlayerForced;
                             pawn.jobs.TryTakeOrderedJob(item, JobTag.MiscWork, true);
                         }
 
-                        var job2 = JobMaker.MakeJob(jobInfo.def, jobInfo.targetA, jobInfo.targetB,
-                            jobInfo.targetC);
-                        job2.playerForced = jobInfo.playerForced;
+                        var job2 = JobMaker.MakeJob(jobInfo.Def, jobInfo.TargetA, jobInfo.TargetB,
+                            jobInfo.TargetC);
+                        job2.playerForced = jobInfo.PlayerForced;
                         pawn.jobs.TryTakeOrderedJob(job2, JobTag.MiscWork, true);
                     }
                 },
@@ -294,7 +293,7 @@ public class SmartDeconstructMod : Mod
         var list = toils.ToList();
         foreach (var toil in list)
         {
-            if (ShouldApply(__instance.pawn, isDecon, isMine) && toil == list[list.Count - 1])
+            if (shouldApply(__instance.pawn, isDeconstruction, isMine) && toil == list[^1])
             {
                 toil.AddFinishAction(delegate
                 {
@@ -366,9 +365,12 @@ public class SmartDeconstructMod : Mod
         }
     }
 
-    private static Designation GetDesignation(Thing b, DesignationDef def, Map map)
+    private static Designation getDesignation(Thing b, DesignationDef def, Map map)
     {
-        return def.targetType == TargetType.Cell ? map.designationManager.DesignationAt(b.Position, def) :
-            def.targetType == TargetType.Thing ? map.designationManager.DesignationOn(b, def) : null;
+        return def.targetType switch
+        {
+            TargetType.Cell => map.designationManager.DesignationAt(b.Position, def),
+            TargetType.Thing => map.designationManager.DesignationOn(b, def), _ => null
+        };
     }
 }
