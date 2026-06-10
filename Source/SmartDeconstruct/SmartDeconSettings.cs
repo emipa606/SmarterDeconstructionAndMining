@@ -27,7 +27,7 @@ public class SmartDeconSettings : ModSettings
 
     public ResearchProjectDef ThickResearch
     {
-        get => research == null ? null : DefDatabase<ResearchProjectDef>.GetNamed(research);
+        get => research == null ? null : DefDatabase<ResearchProjectDef>.GetNamedSilentFail(research);
         set
         {
             if (value == null)

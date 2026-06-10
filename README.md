@@ -1,12 +1,12 @@
 # [Smarter Deconstruction and Mining (Continued)](https://steamcommunity.com/sharedfiles/filedetails/?id=3261302741)
 
-![Image](https://i.imgur.com/buuPQel.png)
+![Image](https://img.litet.net/logos/Info.png)
 
 Update of legodude17s mod https://steamcommunity.com/sharedfiles/filedetails/?id=2398365712
 
-![Image](https://i.imgur.com/pufA0kM.png)
+![Image](https://img.litet.net/logos/Notice.png)
 	
-![Image](https://i.imgur.com/Z4GOv8H.png)
+![Image](https://img.litet.net/logos/OriginalDescription.png)
 
 Stops your pawns from collapsing roofs on top of themselves while deconstructing and mining. Great for tearing down buildings all in one go, removing random structures without worrying about the roofs, removing mountains, and just generally not worrying so much.
 
@@ -37,15 +37,15 @@ A: Only when colonists are preparing to mine/deconstruct, if the setting is on. 
 
 Commissioned by [GGVikky](https://www.twitch.tv/GGVikky1) on the RimWorld Mod Market.
 
-[![Image](https://i.imgur.com/cfoFEMA.png)](https://discord.com/invite/7befJWr9xS)
+[![Image](https://img.litet.net/cfoFEMA.png)](https://discord.com/invite/7befJWr9xS)
 
-![Image](https://i.imgur.com/PwoNOj4.png)
+![Image](https://img.litet.net/logos/ReportingIssues.png)
 
 
 
 -  See if the the error persists if you just have this mod and its requirements active.
 -  If not, try adding your other mods until it happens again.
--  Post your error-log using [HugsLib](https://steamcommunity.com/workshop/filedetails/?id=818773962) or the standalone [Uploader](https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404) and command Ctrl+F12
+-  Always post your log using the [Log Uploader](https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404)
 -  For best support, please use the Discord-channel for error-reporting.
 -  Do not report errors by making a discussion-thread, I get no notification of that.
 -  If you have the solution for a problem, please post it to the GitHub repository.
@@ -53,4 +53,4 @@ Commissioned by [GGVikky](https://www.twitch.tv/GGVikky1) on the RimWorld Mod Ma
 
  
 
-[![Image](https://img.shields.io/github/v/release/emipa606/SmarterDeconstructionAndMining?label=latest%20version&style=plastic&color=9f1111&labelColor=black)](https://steamcommunity.com/sharedfiles/filedetails/changelog/3261302741) | tags:  roofs,  mining, deconstruction
+[![Image](https://img.shields.io/github/v/release/emipa606/SmarterDeconstructionAndMining?label=latest%20version&style=plastic&color=9f1111&labelColor=black)](https://steamcommunity.com/sharedfiles/filedetails/changelog/3261302741) | tags: roofs, deconstruction, mining

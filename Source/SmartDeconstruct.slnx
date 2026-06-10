@@ -3,4 +3,14 @@
     <BuildType Name="Release" />
   </Configurations>
   <Project Path="SmartDeconstruct/SmartDeconstruct.csproj" />
+  <Folder Name="/.github/">
+    <File Path="../.github/copilot-instructions.md" />
+  </Folder>
+  <Folder Name="/XML/About/">
+    <File Path="../About/about.xml" />
+  </Folder>
+  <Folder Name="/XML/Languages/English/Keyed/">
+    <File Path="../Languages/English/Keyed/Alerts.xml" />
+    <File Path="../Languages/English/Keyed/Settings.xml" />
+  </Folder>
 </Solution>
